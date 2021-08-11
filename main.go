@@ -1,7 +1,14 @@
 package main
 
-import "fmt"
+import (
+	"urlshortner/routes"
+	"urlshortner/utils"
+
+	"github.com/labstack/echo"
+)
 
 func main() {
-	fmt.Println("Hello Pavan")
+	e := echo.New()
+	routes.Init(e)
+	e.Start(utils.Port)
 }
