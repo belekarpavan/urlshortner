@@ -1,6 +1,7 @@
 package utils
 
 const (
-	BaseURL = "http://localhost:8000/"
-	Port    = ":8000"
+	BaseURL  = "http://localhost:8000/"
+	Port     = ":8000"
+	FileName = "urlshortnerdata.json"
 )
