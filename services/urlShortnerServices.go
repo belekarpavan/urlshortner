@@ -5,6 +5,7 @@ import (
 	"errors"
 	"log"
 	"os"
+	"path/filepath"
 	"time"
 	"urlshortner/models"
 	"urlshortner/utils"
@@ -29,6 +30,23 @@ func CreateShortURLService(request models.RequestData) (models.URLData, error) {
 
 	return models.URLData{}, errors.New("ERROR_SHORT_URL_NOT_CREATED")
 
+}
+
+func GetOriginalURLService(request models.RequestData) (models.URLData, error) {
+	alias := filepath.Base(request.URL)
+	url, isFound := GetURLByAlias(alias)
+	if !isFound {
+		return models.URLData{}, errors.New("ERROR_URL_NOT_FOUND")
+	}
+	return url, nil
+}
+
+func GetRedirectURLService(alias string) (string, error) {
+	url, isFound := GetURLByAlias(alias)
+	if !isFound {
+		return "", errors.New("ERROR_URL_NOT_FOUND")
+	}
+	return url.OriginalURL, nil
 }
 
 // This function used to get the all urls data from file.

@@ -8,7 +8,9 @@ import (
 
 func Init(e *echo.Echo) {
 	o := e.Group("/o")
+	e.GET("/:alias", handlers.RedirectURLHandler)
 	o.GET("/checkstatus", handlers.ServerRunning)
 	o.POST("/create", handlers.CreateShortURLHandler)
+	o.POST("/get", handlers.GetOriginalURLHandler)
 
 }
